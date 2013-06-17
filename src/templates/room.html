@@ -1,0 +1,15 @@
+
+<template name="room">
+
+  <p style="color:lime">
+    {{description}}
+  </p>
+    
+  <div style="color:yellow">
+    Available exits: <br/>
+    {{#each exits}}
+      <div><i class="icon-chevron-right "></i>{{dir}}</div>
+    {{/each}}
+  </div>
+
+</template>

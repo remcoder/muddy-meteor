@@ -1,0 +1,37 @@
+db entities:
+
+direction: "north" | "south" | "east" | "west"
+
+world
+ - rooms (array of Rooms)
+ - players (array of Players)
+
+player
+
+- name
+- inventory (array of Items)
+
+Item
+- name
+- description
+- view
+
+room
+- name (string)
+- description (string)
+- exits (array of strings)
+- items (array of Item) (things that be picked up immediately)
+- view
+
+game gui
+- repl
+- view
+
+editor gui
+- list of rooms (draggable boxes)
+- room editor
+  - editor:
+    description
+    view
+    exits
+  - navigation

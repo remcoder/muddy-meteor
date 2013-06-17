@@ -1,0 +1,26 @@
+/* CSS declarations go here */
+
+
+html,body {
+    height: 100%;
+    xbackground-color: black;
+}
+
+body {
+  font-family: Verdana;
+  font-size: 18px;
+}
+
+input[type=text],button {
+  font-family: Verdana;
+  margin: 0;
+}
+
+block {
+    display: block;
+}
+
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
