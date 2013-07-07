@@ -1,9 +1,6 @@
 
-
-Executor = function() {}
-
-Executor.prototype = {
-  move: function(playerId, direction) {
+Executor = function () {
+  function move(direction) {
     
     if (!direction || !direction.length) {
       console.error("no direction specified");
@@ -19,10 +16,10 @@ Executor.prototype = {
       console.error("not a valid direction: " + direction);
       return;
     }
-
-    console.log("["+playerId+"]execute move " + intendedDirection);
-    var player = Players.findOne( playerId );
-    var currentLocation = Locations.findOne(player.currentLocationId);
+    var player = Meteor.user();
+    console.log("["+player._id+"]execute move " + intendedDirection);
+    
+    var currentLocation = Locations.findOne(player.profile.currentLocationId);
     console.log(currentLocation);
     console.log("exits: " + currentLocation.exits[intendedDirection]);
     if (!currentLocation.exits[intendedDirection]) {
@@ -32,7 +29,16 @@ Executor.prototype = {
     
     // all is well!
 
-    player.currentLocationId = currentLocation.exits[intendedDirection];
-    Players.update(playerId,player);
+    
+    Meteor.users.update(player._id, { 
+      $set: { 
+        "profile.currentLocationId" : 
+        currentLocation.exits[intendedDirection]
+      } 
+    });
+  }
+
+  return {
+    move:move
   }
 };

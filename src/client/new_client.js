@@ -1,13 +1,13 @@
 // On server startup, if the database is empty, create some initial data.
 if (Meteor.isClient) {
   Meteor.startup(function () {
+    var canvas = new Canvas('canvas');
+        canvas.startUpdateListener();
     
-    Meteor.call("registerNewPlayer", "marvin", function(err, playerId) {
-      console.log("id: "+playerId);
-      Session.set("playerId", playerId);  
-
-      var canvas = new Canvas('canvas');
-      canvas.startUpdateListener();
+    console.log("before init");
+    Meteor.call("init", function() {
+      console.log("after init");
+      
     });
   });
 }

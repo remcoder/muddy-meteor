@@ -21,7 +21,9 @@ Canvas = function (el)
         
       Deps.autorun(function() {
         var location = getLocation();
-
+        if (!location)
+          return;
+        
         pxxl("/fonts/c64.bdf", location.title, function (pixels) {
           var canvas = $('canvas')[0];
           canvas.width = innerWidth;

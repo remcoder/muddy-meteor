@@ -1,13 +1,10 @@
 
 getLocation = function () {
-  var playerId = Session.get("playerId");
-  if (!playerId)
+  var user = Meteor.user();
+  if (!user)
     return;
 
-  var player = Players.findOne(playerId);
-  if (!player)
-    return;
-  return  Locations.findOne(player.currentLocationId);
+  return  Locations.findOne(user.profile.currentLocationId);
 }
 
 Template.room.description = function () {

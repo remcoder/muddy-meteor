@@ -7,14 +7,6 @@ Template.playert.playerName = function() {
 
 Template.playert.events({
   "click button" : function() {
-    var newName = prompt("Enter your name");
-    console.log("new name: " + newName);
-    if (!newName || !newName.length)
-      return;
-
-    var player = Session.get("player");
-    player.name = newName;
-    Session.set("player", player);
-
+    Meteor.logout(); 
   }
 });

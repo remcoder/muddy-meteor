@@ -1,48 +1,27 @@
+Interpreter = function (parser, executor) {
+  var Do = executor;
+  var replace = parser.addReplaceRule;
+  var cmd = parser.addCommand;
 
-console.log("interpreter.js")
+  // define grammar
+  replace(/^n$/, "north");
+  replace(/^north$/, "move north");
+  replace(/\ba /, "");
+  replace(/\bthe /, "");
 
-Interpreter = function (executor) {
-  this.executor = executor;
-}
+  cmd(["take", "get"], 1, Do.take);
+  cmd(["move", "go"], 1, Do.move);
 
-Interpreter.prototype = {
-  interpret : function (cmd) {
-    console.log("["+cmd.playerId+"]interpreting command: " + cmd.text);
+  function interpret(s) {
+    console.log("parsing command: " + s);
+    var cmd = parser.parse(s);  
+    
+    console.log("executing command");
 
-    if (!cmd.text || !cmd.text.length)
-      return;
-
-    var parts = cmd.text.split(" ");
-    var cmdType = parts[0];
-
-    switch(cmdType) {
-      case "north":
-      case "n":
-      case "south":
-      case "s":
-      case "east":
-      case "e":
-      case "west":
-      case "w":
-        this.executor.move(cmd.playerId, parts[0]);
-        break;
-
-      case "move":
-        this.executor.move(cmd.playerId, parts[1]);
-        break;
-
-      case "elp" :
-        console.error("did you mean 'help'?");
-        
-      break;
-      default:
-        console.error("Unkown command: " + cmdType);
-    }
+    executor[cmd.verb].apply(null, cmd.args);
   }
-};
 
-
-
-
-
-
+  return {
+    interpret: interpret
+  }
+}

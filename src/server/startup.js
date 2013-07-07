@@ -2,10 +2,7 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
     console.log("Muddy Meteor starting..");
-
-    Players.remove({});
     
-
     Locations.remove({});
     if (Locations.find().count() === 0) {
       Locations.insert({
@@ -34,9 +31,8 @@ if (Meteor.isServer) {
       });
     }
 
-    var executor = new Executor();
-
-    interpreter = new Interpreter(executor);
-    
+    var exec = new Executor();
+    var parser = new Parser();
+    interpreter = new Interpreter(parser, exec);
   });
 }

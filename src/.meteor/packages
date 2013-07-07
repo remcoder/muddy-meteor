@@ -8,3 +8,5 @@ preserve-inputs
 bootstrap
 autopublish
 underscore
+accounts-ui
+accounts-twitter

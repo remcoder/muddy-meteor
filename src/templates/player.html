@@ -1,4 +1,11 @@
 <template name="playert">
-    <button class="btn btn-info">{{ playerName}}</button>
-
+    
+      {{#if currentUser}} 
+      <button class="btn btn-info">
+        {{ currentUser.profile.name }}
+        </button>
+      {{else}}
+        {{loginButtons}} 
+      {{/if}}
+      
 </template>

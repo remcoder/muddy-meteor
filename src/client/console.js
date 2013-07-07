@@ -12,7 +12,9 @@ Template.console.events({
 
     console.log("Running command: " + cmd);
     
-    Meteor.call("executeCommand", cmd, Session.get("playerId"));
+    Meteor.call("executeCommand", cmd, function(res, err) {
+      //console.error(err);
+    });
 
     $command.val("");
   }
