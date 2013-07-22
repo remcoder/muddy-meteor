@@ -5,7 +5,14 @@ Interpreter = function (parser, executor) {
 
   // define grammar
   replace(/^n$/, "north");
+  replace(/^s$/, "south");
+  replace(/^e$/, "east");
+  replace(/^w$/, "west");
+
   replace(/^north$/, "move north");
+  replace(/^south$/, "move south");
+  replace(/^east$/, "move east");
+  replace(/^west$/, "move west");
   replace(/\ba /, "");
   replace(/\bthe /, "");
 
