@@ -1,28 +1,26 @@
 
+
 Executor = function () {
   function move(direction) {
-    
-    if (!direction || !direction.length) {
+    if (!direction) {
       console.error("no direction specified");
       return;
     }
 
-    var intendedDirection =_.find(DIRECTIONS, function(dir) {
-      return dir == direction || dir[0] == direction;
-    });
-    console.log("intention: " + intendedDirection);
-
-    if (!intendedDirection) {
+    if (!_.contains(DIRECTIONS, direction)) {
       console.error("not a valid direction: " + direction);
       return;
     }
+
     var player = Meteor.user();
-    console.log("["+player._id+"]execute move " + intendedDirection);
+    console.log("["+player._id+"]execute move " + direction);
     
     var currentLocation = Locations.findOne(player.profile.currentLocationId);
     console.log(currentLocation);
-    console.log("exits: " + currentLocation.exits[intendedDirection]);
-    if (!currentLocation.exits[intendedDirection]) {
+    console.log("exits: " + currentLocation.exits[direction]);
+    
+
+    if (!currentLocation.exits[direction]) {
       console.error("You cannot go that way")
       return;
     }
@@ -33,7 +31,7 @@ Executor = function () {
     Meteor.users.update(player._id, { 
       $set: { 
         "profile.currentLocationId" : 
-        currentLocation.exits[intendedDirection]
+          currentLocation.exits[direction]
       } 
     });
   }

@@ -15,8 +15,10 @@ Parser = function () {
 			if (_.has(commands, verb)) 
 				throw new Error("command '" +verb+"' already registered");
 			
-
-			commands[verb] = { arity : arity, fun: fun };
+			if (verb == canonical)
+				commands[verb] = { arity : arity, fun: fun };
+			else
+				commands[verb] = commands[canonical];
 
 			if (index > 0)
 				commands[verb].canonical = canonical;
