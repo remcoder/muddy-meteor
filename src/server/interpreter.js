@@ -1,4 +1,8 @@
+/* global Interpreter */
+
 Interpreter = function (parser, executor) {
+  "use strict";
+
   var Do = executor;
   var replace = parser.addReplaceRule;
   var cmd = parser.addCommand;
@@ -30,5 +34,5 @@ Interpreter = function (parser, executor) {
 
   return {
     interpret: interpret
-  }
-}
+  };
+};

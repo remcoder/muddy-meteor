@@ -20,23 +20,39 @@ Executor = function () {
     console.log("exits: " + currentLocation.exits[direction]);
     
 
-    if (!currentLocation.exits[direction]) {
+    var newLocation = currentLocation.exits[direction];
+
+    if (!newLocation) {
       console.error("You cannot go that way")
       return;
     }
     
     // all is well!
+    _move(player, newLocation);
+  }
+  
+  function _move(player, locationId) {  
+    var timestamp = new Date().getTime();
 
-    
     Meteor.users.update(player._id, { 
       $set: { 
-        "profile.currentLocationId" : 
-          currentLocation.exits[direction]
+        "profile.currentLocationId" : locationId,
+        "profile.lastMoveTime" : timestamp
       } 
+    });
+
+    // update the events table so we can correctly show messages later
+    Events.insert({
+      type: "move",
+      playerId: player._id, 
+      playerName : player.profile.name,
+      locationId: locationId,
+      timestamp: timestamp
     });
   }
 
   return {
-    move:move
+    move:move,
+    _move:_move
   }
 };

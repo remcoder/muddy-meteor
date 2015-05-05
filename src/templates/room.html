@@ -11,5 +11,11 @@
       <div><i class="icon-chevron-right "></i>{{dir}}</div>
     {{/each}}
   </div>
+  <div>
+  	Other people in the room: 
+  	{{#each users}}
+  		<div>{{profile.name}}</div>
+  	{{/each}}
+  </div>
 
 </template>

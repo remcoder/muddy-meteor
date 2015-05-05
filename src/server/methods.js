@@ -8,8 +8,8 @@ Meteor.methods({
 
     console.log("init player:"+user.profile.name );
     var initialLocation = Locations.findOne("in_the_dark");
-    
-    Meteor.users.update(user._id, {$set: { "profile.currentLocationId" : initialLocation._id}});
+    exec._move(user, initialLocation._id);
+    //Meteor.users.update(user._id, {$set: { "profile.currentLocationId" : initialLocation._id}});
   },
 
   executeCommand: function(s) {

@@ -3,6 +3,8 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     console.log("Muddy Meteor starting..");
     
+    Events.remove({});
+
     Locations.remove({});
     if (Locations.find().count() === 0) {
       Locations.insert({
@@ -31,7 +33,7 @@ if (Meteor.isServer) {
       });
     }
 
-    var exec = new Executor();
+    exec = new Executor();
     var parser = new Parser();
     interpreter = new Interpreter(parser, exec);
   });

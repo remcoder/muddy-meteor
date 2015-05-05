@@ -23,7 +23,8 @@ function renderTitle(ctx, pixels, options) {
     var py = pixel.y * size;
 
     ctx.fillStyle = fill;
-    ctx.strokeStyle = stroke;
+    if (stroke)
+      ctx.strokeStyle = stroke;
     if (fill) ctx.fillRect(px,py,size,size);
     if (stroke) ctx.strokeRect(px,py,size,size);
 

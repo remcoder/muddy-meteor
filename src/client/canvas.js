@@ -20,11 +20,11 @@ Canvas = function (el)
     {
         
       Deps.autorun(function() {
-        var location = getLocation();
-        if (!location)
-          return;
+        // var location = getLocation();
+        // if (!location)
+        //   return;
         
-        pxxl("/fonts/c64.bdf", location.title, function (pixels) {
+        pxxl("/fonts/c64.bdf", "Muddy Meteor", function (pixels) {
           var canvas = $('canvas')[0];
           canvas.width = innerWidth;
           var ctx = canvas.getContext('2d');
